@@ -1,0 +1,17 @@
+net clk_i loc=p43;
+
+# wing3
+net s_o<0> loc=p84;
+net s_o<1> loc=p83;
+net s_o<2> loc=p94;
+net s_o<3> loc=p73;
+net s_o<4> loc=p72;
+net s_o<5> loc=p3;
+net s_o<6> loc=p4;
+net s_o<7> loc=p62;
+
+# PM4
+net b_io<0> loc=p20;
+net b_io<1> loc=p52;
+net b_io<2> loc=p19;
+net b_io<3> loc=p56;
