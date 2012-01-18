@@ -1,0 +1,4 @@
+=head1 StickIt! Board and Modules
+
+The StickIt! board and modules are used with the XuLA FPGA board to provide additional functions. 
+The documentation, FPGA projects, firmware, schematic and PCB files are included in the subdirectories.
