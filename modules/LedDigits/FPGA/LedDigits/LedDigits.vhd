@@ -115,20 +115,20 @@ package body LedDigitsPckg is
       when 16#0E# | 16#45# | 16#65# => ledDigit_o := "1111001";  -- E
       when 16#0F# | 16#46# | 16#66# => ledDigit_o := "1110001";  -- F
       when 16#47# | 16#67#          => ledDigit_o := "0111101";  -- G
-      when 16#48# | 16#68#          => ledDigit_o := "1110101";  -- H
+      when 16#48# | 16#68#          => ledDigit_o := "1110100";  -- h
       when 16#49# | 16#69#          => ledDigit_o := "0110000";  -- I
       when 16#4a# | 16#6a#          => ledDigit_o := "0011110";  -- J
       when 16#4b# | 16#6b#          => ledDigit_o := "0001000";  --  
       when 16#4c# | 16#6c#          => ledDigit_o := "0111000";  -- L
       when 16#4d# | 16#6d#          => ledDigit_o := "0001000";  --  
-      when 16#4e# | 16#6e#          => ledDigit_o := "0001000";  --  
+      when 16#4e# | 16#6e#          => ledDigit_o := "1010100";  -- n  
       when 16#4f# | 16#6f#          => ledDigit_o := "1011100";  -- o
       when 16#50# | 16#70#          => ledDigit_o := "1110011";  -- P
       when 16#51# | 16#71#          => ledDigit_o := "0001000";  --  
       when 16#52# | 16#72#          => ledDigit_o := "1010000";  -- r
       when 16#53# | 16#73#          => ledDigit_o := "1101101";  -- S
       when 16#54# | 16#74#          => ledDigit_o := "1111000";  -- t
-      when 16#55# | 16#75#          => ledDigit_o := "0111110";  -- U
+      when 16#55# | 16#75#          => ledDigit_o := "0011100";  -- U
       when 16#56# | 16#76#          => ledDigit_o := "0001000";  --  
       when 16#57# | 16#77#          => ledDigit_o := "0001000";  --  
       when 16#58# | 16#78#          => ledDigit_o := "0001000";  --  
@@ -292,7 +292,7 @@ begin
       if cntr_r = 0 then
         cntr_r      := integer(FREQ_G / 2.0 * 1_000_000.0);
         ascii_r     <= ascii_r(48 downto 0) & std_logic_vector(asciiChar_v);
-		if asciiChar_v = "0001111" then
+		if asciiChar_v = "1111111" then
 		  asciiChar_v := (others=>'0');
 		else
           asciiChar_v := asciiChar_v + 1;
