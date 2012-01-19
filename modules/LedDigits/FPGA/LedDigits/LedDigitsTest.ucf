@@ -1,5 +1,4 @@
 net clk_i loc=p43;
-#net clk_i loc=A9;
 
 # wing3
 net s_o<0> loc=p84;
@@ -10,15 +9,6 @@ net s_o<4> loc=p72;
 net s_o<5> loc=p3;
 net s_o<6> loc=p4;
 net s_o<7> loc=p62;
-# wing3 (Spartan-6LX)
-#net s_o<0> loc=B15;
-#net s_o<1> loc=B16;
-#net s_o<2> loc=C1;
-#net s_o<3> loc=C16;
-#net s_o<4> loc=F16;
-#net s_o<5> loc=E1;
-#net s_o<6> loc=F2;
-#net s_o<7> loc=J14;
 
 # wing2
 #net s_o<0> loc=p61;
@@ -50,16 +40,6 @@ net s_o<7> loc=p62;
 #net s_o<6> loc=p50;
 #net s_o<7> loc=p36;
 
-# pm2 (PMOD-reversed)
-#net s_o<0> loc=p35;
-#net s_o<1> loc=p33;
-#net s_o<2> loc=p44;
-#net s_o<3> loc=p37;
-#net s_o<4> loc=p34;
-#net s_o<5> loc=p32;
-#net s_o<6> loc=p36;
-#net s_o<7> loc=p50;
-
 # pm3 (PMOD)
 #net s_o<0> loc=p20;
 #net s_o<1> loc=p33;
@@ -69,16 +49,6 @@ net s_o<7> loc=p62;
 #net s_o<5> loc=p32;
 #net s_o<6> loc=p56;
 #net s_o<7> loc=p50;
-
-# pm3 (PMOD-reversed)
-#net s_o<0> loc=p33;
-#net s_o<1> loc=p20;
-#net s_o<2> loc=p37;
-#net s_o<3> loc=p52;
-#net s_o<4> loc=p32;
-#net s_o<5> loc=p19;
-#net s_o<6> loc=p50;
-#net s_o<7> loc=p56;
 
 # pm4 (PMOD)
 #net s_o<0> loc=p13;
@@ -90,16 +60,6 @@ net s_o<7> loc=p62;
 #net s_o<6> loc=p61;
 #net s_o<7> loc=p56;
 
-# pm4 (PMOD-reversed)
-#net s_o<0> loc=p20;
-#net s_o<1> loc=p13;
-#net s_o<2> loc=p52;
-#net s_o<3> loc=p57;
-#net s_o<4> loc=p19;
-#net s_o<5> loc=p12;
-#net s_o<6> loc=p56;
-#net s_o<7> loc=p61;
-
 # pm5 (PMOD)
 #net s_o<0> loc=p62;
 #net s_o<1> loc=p13;
@@ -110,16 +70,6 @@ net s_o<7> loc=p62;
 #net s_o<6> loc=p72;
 #net s_o<7> loc=p61;
 
-# pm5 (PMOD-reversed)
-#net s_o<0> loc=p13;
-#net s_o<1> loc=p62;
-#net s_o<2> loc=p57;
-#net s_o<3> loc=p4;
-#net s_o<4> loc=p12;
-#net s_o<5> loc=p3;
-#net s_o<6> loc=p61;
-#net s_o<7> loc=p72;
-
 # pm6 (PMOD)
 #net s_o<0> loc=p73;
 #net s_o<1> loc=p62;
@@ -129,13 +79,3 @@ net s_o<7> loc=p62;
 #net s_o<5> loc=p3;
 #net s_o<6> loc=p84;
 #net s_o<7> loc=p72;
-
-# pm6 (PMOD-reversed)
-#net s_o<0> loc=p62;
-#net s_o<1> loc=p73;
-#net s_o<2> loc=p4;
-#net s_o<3> loc=p94;
-#net s_o<4> loc=p3;
-#net s_o<5> loc=p83;
-#net s_o<6> loc=p72;
-#net s_o<7> loc=p84;
