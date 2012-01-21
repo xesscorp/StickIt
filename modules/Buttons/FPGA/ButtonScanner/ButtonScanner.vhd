@@ -1,4 +1,4 @@
-----------------------------------------------------------------------------------
+--*********************************************************************
 -- This program is free software; you can redistribute it and/or
 -- modify it under the terms of the GNU General Public License
 -- as published by the Free Software Foundation; either version 2
@@ -15,11 +15,11 @@
 -- 02111-1307, USA.
 --
 -- ©2011 - X Engineering Software Systems Corp. (www.xess.com)
-----------------------------------------------------------------------------------
+--*********************************************************************
 
-----------------------------------------------------------------------------------
+--*********************************************************************
 -- Module for scanning a button array.
-----------------------------------------------------------------------------------
+--*********************************************************************
 
 library IEEE;
 use IEEE.std_logic_1164.all;
@@ -41,6 +41,11 @@ package ButtonScannerPckg is
 
 end package;
 
+
+--*********************************************************************
+-- Button scanner module.
+--*********************************************************************
+
 library IEEE, UNISIM;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
@@ -50,79 +55,83 @@ use work.CommonPckg.all;
 
 entity ButtonScanner is
   generic(
-    FREQ_G      : real := 100.0;        -- Operating frequency in MHz.
+    FREQ_G      : real := 100.0;        -- Master clock frequency in MHz.
     SCAN_FREQ_G : real := 1.0  -- Desired frequency for scanning the buttons in KHz.
     );
   port(
-    clk_i    : in    std_logic;
-    b_io     : inout std_logic_vector(3 downto 0);
-    button_o : out   std_logic_vector(12 downto 1)
+    clk_i    : in    std_logic;         -- Master clock.
+    b_io     : inout std_logic_vector(3 downto 0);  -- Scanning pins to button array.
+    -- There is one output for each button in the array. The bit in position i will be high
+    -- if button i is pressed.
+    button_o : out   std_logic_vector(12 downto 1)  -- Button states: pressed (1) or not (0).
     );
 end entity;
 
 architecture arch of ButtonScanner is
-  signal driverShf_r : unsigned(b_io'range)     := "1000";
-  signal recvShf_r   : unsigned(b_io'range)     := "0100";
-  signal buttonShf_r : unsigned(button_o'range) := "100000000000";
-  signal bIn_s       : std_logic_vector(b_io'range);
+  signal driverShf_r : unsigned(b_io'range)     := "1000";  -- Indicates which scan pin is the driver.
+  signal recvShf_r   : unsigned(b_io'range)     := "0100";  -- Indicates which scan pin is the receiver.
+  signal buttonShf_r : unsigned(button_o'range) := "100000000000";  -- Indicates which button is being scanned.
+  signal bIn_s       : std_logic_vector(b_io'range);  -- The current logic levels on the scan pin inputs.
 begin
 
   process(clk_i)
-    constant ALL_ZERO       : std_logic_vector(button_o'range) := (others => ZERO);
+    constant ALL_ZERO_C     : std_logic_vector(button_o'range) := (others => ZERO);
     -- The delay between scanning individual buttons is the total scan time divided by the number of buttons.
-    constant MAX_CNTR       : natural                          := integer(ceil(FREQ_G * 1000.0 / (SCAN_FREQ_G * real(button_o'length))));
-    variable scanCntr_v     : natural range 0 to MAX_CNTR;  -- Button scan timer.
-    -- The buttons have to hold their values for a certain number of scans before they are accepted.
-    constant DEBOUNCE_CNT   : natural                          := 10 * button_o'length;
-    variable debounceCntr_v : natural range 0 to DEBOUNCE_CNT;
+    constant SCAN_PERIOD_C  : natural                          := integer(ceil(FREQ_G * 1000.0 / (SCAN_FREQ_G * real(button_o'length))));
+    variable scanTimer_v    : natural range 0 to SCAN_PERIOD_C;  -- Button scan timer.
+    -- The buttons have to hold their values for a certain number of individual scans before they are accepted.
+    constant DEBOUNCE_CNT_C : natural                          := 10 * button_o'length;
+    variable debounceCntr_v : natural range 0 to DEBOUNCE_CNT_C;
     -- The previous state of the buttons to which the current state is compared for debouncing.
-    variable buttonState_v  : std_logic_vector(button_o'range) := (others => ZERO);
-    variable buttonIn_v     : std_logic_vector(button_o'range);
+    variable buttonNow_v    : std_logic_vector(button_o'range);  -- Current state.
+    variable buttonPrev_v   : std_logic_vector(button_o'range) := (others => ZERO);  -- Previous state
   begin
     if rising_edge(clk_i) then
-      if scanCntr_v /= 0 then  -- Wait until current button scan time has elapsed.
-        scanCntr_v := scanCntr_v - 1;
+      
+      if scanTimer_v /= 0 then  -- Wait until current button scan time has elapsed.
+        scanTimer_v := scanTimer_v - 1;
+        
       else  -- OK, now process the state of the currently-driven buttons.
         
-        scanCntr_v := MAX_CNTR;  -- Reload the counter for the next scan.
+        scanTimer_v := SCAN_PERIOD_C;   -- Reload the timer for the next scan.
 
-        if (std_logic_vector(recvShf_r) and bIn_s) = "0000" then
-          -- The currently driven button is not pressed.
-          buttonIn_v := (others => ZERO);  -- Place a 0 in the current button's position.
-        else
-          -- The currently-driven button is pressed.
-          buttonIn_v := std_logic_vector(buttonShf_r);  -- Place a 1 in the current button's position.
+        if (std_logic_vector(recvShf_r) and bIn_s) = "0000" then  -- The currently driven button is not pressed.
+          buttonNow_v := (others => ZERO);  -- Place a 0 in the current button's position.
+        else  -- The currently-driven button is pressed.
+          buttonNow_v := std_logic_vector(buttonShf_r);  -- Place a 1 in the current button's position.
         end if;
 
-        if ((buttonState_v xor buttonIn_v) and std_logic_vector(buttonShf_r)) /= ALL_ZERO then
+        if ((buttonNow_v xor buttonPrev_v) and std_logic_vector(buttonShf_r)) /= ALL_ZERO_C then
           -- If the current button's state has changed from its previous value,
           -- then record its current value and reset the debounce counter.
-          buttonState_v  := (buttonState_v and not std_logic_vector(buttonShf_r)) or buttonIn_v;
-          debounceCntr_v := DEBOUNCE_CNT;
+          buttonPrev_v   := (buttonPrev_v and not std_logic_vector(buttonShf_r)) or buttonNow_v;
+          debounceCntr_v := DEBOUNCE_CNT_C;
         else
           -- If the current button's state has not changed, then just decrement the debounce counter.
           debounceCntr_v := debounceCntr_v - 1;
           if debounceCntr_v = 0 then
             -- If the debounce counter has reached 0, then output the current state of the buttons.
-            button_o(1)    <= buttonState_v(1);
-            button_o(2)    <= buttonState_v(2);
-            button_o(3)    <= buttonState_v(3);
-            button_o(7)    <= buttonState_v(4);
-            button_o(8)    <= buttonState_v(5);
-            button_o(4)    <= buttonState_v(6);
-            button_o(11)   <= buttonState_v(7);
-            button_o(5)    <= buttonState_v(8);
-            button_o(9)    <= buttonState_v(9);
-            button_o(6)    <= buttonState_v(10);
-            button_o(10)   <= buttonState_v(11);
-            button_o(12)   <= buttonState_v(12);
-            debounceCntr_v := DEBOUNCE_CNT;  -- Reset the debounce counter for the next scan.
+            -- The buttons have to be unscrambled according to the table given in the manual.
+            button_o(1)    <= buttonPrev_v(1);   -- Drive B0, read B1.
+            button_o(2)    <= buttonPrev_v(2);   -- Drive B0, read B2.
+            button_o(3)    <= buttonPrev_v(3);   -- Drive B0, read B3.
+            button_o(7)    <= buttonPrev_v(4);   -- Drive B1, read B2.
+            button_o(8)    <= buttonPrev_v(5);   -- Drive B1, read B3.
+            button_o(4)    <= buttonPrev_v(6);   -- Drive B1, read B0.
+            button_o(11)   <= buttonPrev_v(7);   -- Drive B2, read B3.
+            button_o(5)    <= buttonPrev_v(8);   -- Drive B2, read B0.
+            button_o(9)    <= buttonPrev_v(9);   -- Drive B2, read B1.
+            button_o(6)    <= buttonPrev_v(10);  -- Drive B3, read B0.
+            button_o(10)   <= buttonPrev_v(11);  -- Drive B3, read B1.
+            button_o(12)   <= buttonPrev_v(12);  -- Drive B3, read B2.
+            debounceCntr_v := DEBOUNCE_CNT_C;  -- Reset the debounce counter for the next scan.
           end if;
         end if;
 
         if (recvShf_r rol 1) = driverShf_r then
-          -- If we've finished scanning all the buttons connected to this driver, then shift to the
-          -- next driver and get ready to scan the buttons its connected to.
+          -- If we've finished scanning all the buttons connected to this driver (i.e., next receive
+          -- pin is the same as the current driving pin), then shift to the next driver and get ready 
+          -- to scan the buttons its connected to.
           driverShf_r <= driverShf_r rol 1;  -- Go to the next driver.
           recvShf_r   <= driverShf_r rol 2;  -- Receive from the next input just past the driver.
           buttonShf_r <= buttonShf_r rol 1;  -- Holds the bit mask for the next scanned button.
@@ -136,12 +145,24 @@ begin
     end if;
   end process;
 
+  -- Generate tristatable I/O buffers. One will be driving into the button array, 
+  -- while the others are inputs that sense the buttons.
   IobufLoop : for i in b_io'low to b_io'high generate
---    UIobuf : IOBUF generic map(IOSTANDARD => "LVTTL") port map(T => recvShf_r(i), I => driverShf_r(i), O => bIn_s(i), IO => b_io(i));
+    -- T is the tristate control so only the buffer for the driver is not tristated.
+    -- I is the input to the buffer, so always set it at logic 1. That won't matter for the receivers, only the driver.
+    -- O is the level sensed on the buffer input I/O pin.
+    -- I/O is the buffer I/O pin that attaches to the button array.
     UIobuf : IOBUF generic map(IOSTANDARD => "LVTTL") port map(T => not driverShf_r(i), I => driverShf_r(i), O => bIn_s(i), IO => b_io(i));
+--    UIobuf : IOBUF generic map(IOSTANDARD => "LVTTL") port map(T => not driverShf_r(i), I => HI, O => bIn_s(i), IO => b_io(i));
   end generate;
 end architecture;
 
+
+
+--*********************************************************************
+-- Button scanner test displays the number of the pressed button
+-- (1, 2, 3, ..., A, B, C) on the first digit of the LED display.
+--*********************************************************************
 
 library IEEE;
 use IEEE.std_logic_1164.all;
