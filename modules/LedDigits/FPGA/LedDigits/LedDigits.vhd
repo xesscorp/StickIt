@@ -1,4 +1,4 @@
-----------------------------------------------------------------------------------
+--*********************************************************************
 -- This program is free software; you can redistribute it and/or
 -- modify it under the terms of the GNU General Public License
 -- as published by the Free Software Foundation; either version 2
@@ -15,11 +15,12 @@
 -- 02111-1307, USA.
 --
 -- ©2011 - X Engineering Software Systems Corp. (www.xess.com)
-----------------------------------------------------------------------------------
+--*********************************************************************
 
-----------------------------------------------------------------------------------
+
+--*********************************************************************
 -- Module for driving StickIt! seven-segment LED string.
-----------------------------------------------------------------------------------
+--*********************************************************************
 
 
 library IEEE;
@@ -28,7 +29,7 @@ use work.CommonPckg.all;
 
 package LedDigitsPckg is
 
-  -- Subtype definition for the vector of bits that drive a seven-segment LED.
+-- Subtype definition for the vector of bits that drive a seven-segment LED.
   subtype LedDigit_t is std_logic_vector(6 downto 0);
 
 --**************************************************************************************************
@@ -41,33 +42,34 @@ package LedDigitsPckg is
     ) return LedDigit_t;            -- Return LED segment activation pattern.
 
 --**************************************************************************************************
--- This module outputs a set of LED activation bit vectors to a charlie-plexed string of LED digits.
+-- This module outputs a set of LED activation bit vectors to a charlieplexed string of LED digits.
 --**************************************************************************************************
   component LedDigitsDisplay is
     generic (
       FREQ_G        : real := 100.0;    -- Operating frequency in MHz.
-      UPDATE_FREQ_G : real := 1.0  -- Desired update frequency for the LED segments in MHz.
+      UPDATE_FREQ_G : real := 1.0  -- Desired update frequency for the LED segments in KHz.
       );
-    port (clk_i          : in  std_logic;  -- Input clock.
-          -- The following 7-bit vector inputs are the segment activations for the 8 LED digits.
-          -- A 1 in a vector bit lights-up the corresponding LED segment. The bit indices correspond to
-          -- the following LED segments: 0->A, 1->B, 2->C, 3->D, 4->E, 5->F, 6->G.
-          ledDigit1_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-          ledDigit2_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-          ledDigit3_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-          ledDigit4_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-          ledDigit5_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-          ledDigit6_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-          ledDigit7_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-          ledDigit8_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-          -- This is the same thing as all the individual 7-bit vectors combined into a single vector.
-          -- The following bit slices correspond to the vector inputs shown above:
-          -- (6 downto 0)->ledDigit1_i, (13 downto 7)->ledDigit2_i, (20 downto 8)->ledDigit3_i, (27 downto 21)->ledDigit4_i, 
-          -- (34 downto 28)->ledDigit5_i, (41 downto 35)->ledDigit6_i, (48 downto 42)->ledDigit7_i, (55 downto 49)->ledDigit8_i. 
-          ledAllDigits_i : in  std_logic_vector(55 downto 0) := (others => ZERO);
-          -- These are the 3-state drivers for the LED digits.
-          ledDrivers_o   : out std_logic_vector (7 downto 0)
-          );
+    port (
+      clk_i          : in  std_logic;   -- Input clock.
+      -- The following 7-bit vector inputs are the segment activations for the 8 LED digits.
+      -- A 1 in a vector bit lights-up the corresponding LED segment. The bit indices correspond to
+      -- the following LED segments: 0->A, 1->B, 2->C, 3->D, 4->E, 5->F, 6->G.
+      ledDigit1_i    : in  LedDigit_t                    := (others => ZERO);
+      ledDigit2_i    : in  LedDigit_t                    := (others => ZERO);
+      ledDigit3_i    : in  LedDigit_t                    := (others => ZERO);
+      ledDigit4_i    : in  LedDigit_t                    := (others => ZERO);
+      ledDigit5_i    : in  LedDigit_t                    := (others => ZERO);
+      ledDigit6_i    : in  LedDigit_t                    := (others => ZERO);
+      ledDigit7_i    : in  LedDigit_t                    := (others => ZERO);
+      ledDigit8_i    : in  LedDigit_t                    := (others => ZERO);
+      -- This is the same thing as all the individual 7-bit vectors combined into a single vector.
+      -- The following bit slices correspond to the vector inputs shown above:
+      -- (6 downto 0)->ledDigit1_i, (13 downto 7)->ledDigit2_i, (20 downto 8)->ledDigit3_i, (27 downto 21)->ledDigit4_i, 
+      -- (34 downto 28)->ledDigit5_i, (41 downto 35)->ledDigit6_i, (48 downto 42)->ledDigit7_i, (55 downto 49)->ledDigit8_i. 
+      ledAllDigits_i : in  std_logic_vector(55 downto 0) := (others => ZERO);
+      -- These are the 3-state drivers for the LED digits.
+      ledDrivers_o   : out std_logic_vector (7 downto 0)
+      );
   end component;
 
 end package;
@@ -145,7 +147,7 @@ end package body;
 
 
 --**************************************************************************************************
--- This module outputs a set of LED activation bit vectors to a charlie-plexed string of LED digits.
+-- This module outputs a set of LED activation bit vectors to a charlieplexed string of LED digits.
 --**************************************************************************************************
 
 library IEEE, UNISIM;
@@ -153,60 +155,62 @@ use IEEE.MATH_REAL.all;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use UNISIM.vcomponents.all;
+use work.LedDigitsPckg.all;
 use work.CommonPckg.all;
 
 entity LedDigitsDisplay is
   generic (
     FREQ_G        : real := 100.0;      -- Operating frequency in MHz.
-    UPDATE_FREQ_G : real := 1.0  -- Desired update frequency for the LED segments in KHz.
+    UPDATE_FREQ_G : real := 1.0  -- Desired update frequency for the entire LED display in KHz.
     );
-  port (clk_i          : in  std_logic;  -- Input clock.
-        -- The following 7-bit vector inputs are the segment activations for the 8 LED digits.
-        -- A 1 in a vector bit lights-up the corresponding LED segment. The bit indices correspond to
-        -- the following LED segments: 0->A, 1->B, 2->C, 3->D, 4->E, 5->F, 6->G.
-        ledDigit1_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-        ledDigit2_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-        ledDigit3_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-        ledDigit4_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-        ledDigit5_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-        ledDigit6_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-        ledDigit7_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-        ledDigit8_i    : in  std_logic_vector (6 downto 0) := (others => ZERO);
-        -- This is the same thing as all the individual 7-bit vectors combined into a single vector.
-        -- The following bit slices correspond to the vector inputs shown above:
-        -- (6 downto 0)->ledDigit1_i, (13 downto 7)->ledDigit2_i, (20 downto 8)->ledDigit3_i, (27 downto 21)->ledDigit4_i, 
-        -- (34 downto 28)->ledDigit5_i, (41 downto 35)->ledDigit6_i, (48 downto 42)->ledDigit7_i, (55 downto 49)->ledDigit8_i. 
-        ledAllDigits_i : in  std_logic_vector(55 downto 0) := (others => ZERO);
-        -- These are the 3-state drivers for the LED digits.
-        ledDrivers_o   : out std_logic_vector (7 downto 0)
-        );
+  port (
+    clk_i          : in  std_logic;     -- Input clock.
+    -- The following 7-bit vector inputs are the segment activations for the 8 LED digits.
+    -- A 1 in a vector bit lights-up the corresponding LED segment. The bit indices correspond to
+    -- the following LED segments: 0->A, 1->B, 2->C, 3->D, 4->E, 5->F, 6->G.
+    ledDigit1_i    : in  LedDigit_t                    := (others => ZERO);
+    ledDigit2_i    : in  LedDigit_t                    := (others => ZERO);
+    ledDigit3_i    : in  LedDigit_t                    := (others => ZERO);
+    ledDigit4_i    : in  LedDigit_t                    := (others => ZERO);
+    ledDigit5_i    : in  LedDigit_t                    := (others => ZERO);
+    ledDigit6_i    : in  LedDigit_t                    := (others => ZERO);
+    ledDigit7_i    : in  LedDigit_t                    := (others => ZERO);
+    ledDigit8_i    : in  LedDigit_t                    := (others => ZERO);
+    -- This is the same thing as all the individual 7-bit vectors combined into a single vector.
+    -- The following bit slices correspond to the vector inputs shown above:
+    -- (6 downto 0)->ledDigit1_i, (13 downto 7)->ledDigit2_i, (20 downto 8)->ledDigit3_i, (27 downto 21)->ledDigit4_i, 
+    -- (34 downto 28)->ledDigit5_i, (41 downto 35)->ledDigit6_i, (48 downto 42)->ledDigit7_i, (55 downto 49)->ledDigit8_i. 
+    ledAllDigits_i : in  std_logic_vector(55 downto 0) := (others => ZERO);
+    -- These are the 3-state drivers for the LED digits.
+    ledDrivers_o   : out std_logic_vector (7 downto 0)
+    );
 end entity;
 
 architecture arch of LedDigitsDisplay is
   signal digitShf_r : unsigned(ledDrivers_o'range) := "00000001";  -- Shift reg indicates which digit is active.
-  signal segShf_r   : unsigned(ledDrivers_o'range) := "00010100";  -- Shift reg indicates which LED segment is active.
+  signal segShf_r   : unsigned(ledDrivers_o'range) := "00010100";  -- Shift reg indicates which LED segments are active.
   signal segments_s : std_logic_vector(ledAllDigits_i'range);  -- 1 indicates segment is on, 0 means off.
   signal cathodes_s : std_logic_vector(6 downto 0);  -- Cathode levels for the LEDs of the active digit.
   signal tris_s     : std_logic_vector(ledDrivers_o'range);  -- Output driver tristate settings.
 begin
 
-  -- Shift the active LED segment every MAX_CNTR clock cycles, and shift the active digit after every eight shifts of the LED segment.
+  -- Shift the active LED segment every SEG_PERIOD_C clock cycles, and shift the active digit after every eight shifts of the LED segment.
   process(clk_i)
-    constant MAX_CNTR    : natural := integer(ceil(FREQ_G * 1000.0 / (UPDATE_FREQ_G * real(ledAllDigits_i'length))));
-    variable segCntr_v   : natural range 0 to MAX_CNTR;
-    variable digitCntr_v : natural range ledDrivers_o'range;
+    constant SEG_PERIOD_C : natural := integer(ceil(FREQ_G * 1000.0 / (UPDATE_FREQ_G * real(ledAllDigits_i'length))));
+    variable segTimer_v   : natural range 0 to SEG_PERIOD_C;
+    variable segCntr_v    : natural range ledDrivers_o'range;
   begin
     if rising_edge(clk_i) then
-      if segCntr_v /= 0 then
-        segCntr_v := segCntr_v - 1;  -- Decrement LED segment counter until it reaches 0.
-      else                           -- The LED segment counter has reached 0.
-        segShf_r  <= segShf_r rol 1;
-        segCntr_v := MAX_CNTR;          -- Restart the LED segment counter.
-        if digitCntr_v /= 0 then
-          digitCntr_v := digitCntr_v - 1;  -- Decrement digit counter until it reaches 0.
-        else                            -- The digit counter has reached 0.
-          digitShf_r  <= digitShf_r rol 1;   -- Shift to next digit.
-          digitCntr_v := ledDrivers_o'high;  -- Restart the digit counter.
+      if segTimer_v /= 0 then  -- The timer period for this segment has not expired.
+        segTimer_v := segTimer_v - 1;   -- Decrement LED segment timer.
+      else                              -- The LED segment timer has expired.
+        segShf_r   <= segShf_r rol 1;  -- Shift to the next segment of the digit.
+        segTimer_v := SEG_PERIOD_C;     -- Restart the LED segment timer.
+        if segCntr_v /= 0 then  -- If all the segments in this digit are not done...
+          segCntr_v := segCntr_v - 1;  -- ... decrement digit counter until it reaches 0.
+        else  -- Else, all the segments in this digit are done so.
+          digitShf_r <= digitShf_r rol 1;   -- Shift to next digit.
+          segCntr_v  := ledDrivers_o'high;  -- Restart the segment counter.
         end if;
       end if;
     end if;
@@ -216,7 +220,7 @@ begin
   segments_s <= ledAllDigits_i or (ledDigit8_i & ledDigit7_i & ledDigit6_i & ledDigit5_i & ledDigit4_i & ledDigit3_i & ledDigit2_i & ledDigit1_i);
 
   -- Select a slice of the total LED segment activation vector corresponding to the LEDs for the currently active digit.
-  -- The cathode level will be low for each active segment.
+  -- The cathode level will be low for each active segment in the digit.
   process(digitShf_r, segments_s)
   begin
     case digitShf_r is
@@ -240,16 +244,18 @@ begin
     variable j : natural range digitShf_r'range := 0;
   begin
     j      := 0;
-    tris_s <= not std_logic_vector(digitShf_r);
+    tris_s <= not std_logic_vector(digitShf_r);  -- Start off by tristating everything except the current digit's anode.
     for i in digitShf_r'low to digitShf_r'high loop
-      if digitShf_r(i) = LO then  -- The cathodes for the active digit have low levels in the digit shift register. Skip the anode.
-        tris_s(i) <= not (segShf_r(i) and not cathodes_s(j));  -- Activate tristate driver if the segment is active and the cathode level is low.
-        j         := j + 1;             -- Move to the next cathode bit.
+      if digitShf_r(i) = LO then  -- Process only the cathodes of the active digit which have low levels in the digit shift register. Skip the anode.
+        if segShf_r(i) = HI and cathodes_s(j) = LO then  -- Activate tristate driver if the segment is active and the cathode level is low.
+          tris_s(i) <= LO;              -- Turn tristate off and driver on.
+        end if;
+        j := j + 1;                     -- Move to the next cathode bit.
       end if;
     end loop;
   end process;
 
-  -- Instantiate the tristate drivers. The active digit shift register is attached to the driver inputs so the anode of the currently
+  -- Instantiate the tristate drivers. The active digit shift register is attached to the driver inputs so only the anode of the currently
   -- active LED digit is driven high. The other drivers will pull the cathode pins low if the corresponding LED segment is active.
   ObuftLoop : for i in ledDrivers_o'low to ledDrivers_o'high generate
     UObuft : OBUFT generic map(DRIVE => 24, IOSTANDARD => "LVTTL") port map(T => tris_s(i), I => digitShf_r(i), O => ledDrivers_o(i));
@@ -285,18 +291,18 @@ architecture arch of LedDigitsTest is
 begin
   
   process(clk_i) is
-    variable cntr_r      : integer := 0;
+    variable cntr_r      : integer              := 0;
     variable asciiChar_v : unsigned(6 downto 0) := "0000000";
   begin
     if rising_edge(clk_i) then
       if cntr_r = 0 then
-        cntr_r      := integer(FREQ_G / 2.0 * 1_000_000.0);
-        ascii_r     <= ascii_r(48 downto 0) & std_logic_vector(asciiChar_v);
-		if asciiChar_v = "1111111" then
-		  asciiChar_v := (others=>'0');
-		else
+        cntr_r  := integer(FREQ_G / 2.0 * 1_000_000.0);
+        ascii_r <= ascii_r(48 downto 0) & std_logic_vector(asciiChar_v);
+        if asciiChar_v = "1111111" then
+          asciiChar_v := (others => '0');
+        else
           asciiChar_v := asciiChar_v + 1;
-		end if;
+        end if;
       else
         cntr_r := cntr_r - 1;
       end if;
