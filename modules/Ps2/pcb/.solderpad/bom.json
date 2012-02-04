@@ -1,0 +1,64 @@
+{
+	"items": [
+		{
+			"designator": "H1",
+			"value": "MOUNT-HOLE3.0",
+			"description": "MOUNTING HOLE with drill center marker"
+		},
+		{
+			"designator": "H2",
+			"value": "MOUNT-HOLE3.0",
+			"description": "MOUNTING HOLE with drill center marker"
+		},
+		{
+			"designator": "R1",
+			"value": "742C083331JPTR",
+			"description": "Resistor 4-pack"
+		},
+		{
+			"designator": "R2",
+			"value": "742C083472JPTR",
+			"description": "Resistor 4-pack"
+		},
+		{
+			"designator": "STK1",
+			"value": "STICKIT-HEADER",
+			"description": "StickIt Header"
+		},
+		{
+			"designator": "U$1",
+			"value": "LOGO-STICKIT700X200",
+			"description": ""
+		},
+		{
+			"designator": "U$2",
+			"value": "CC_CC",
+			"description": ""
+		},
+		{
+			"designator": "U$3",
+			"value": "CC_BY",
+			"description": ""
+		},
+		{
+			"designator": "U$4",
+			"value": "CC_SA",
+			"description": ""
+		},
+		{
+			"designator": "U$5",
+			"value": "CC_COPYRIGHT",
+			"description": ""
+		},
+		{
+			"designator": "U$6",
+			"value": "LOGO-XESS",
+			"description": ""
+		},
+		{
+			"designator": "X1",
+			"value": "786580-1",
+			"description": "Dual 6-Pin Mini-DIN Female Socket"
+		}
+	]
+}
