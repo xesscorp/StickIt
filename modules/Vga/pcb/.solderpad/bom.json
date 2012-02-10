@@ -1,0 +1,84 @@
+{
+	"items": [
+		{
+			"designator": "H1",
+			"value": "MOUNT-HOLE3.0",
+			"description": "MOUNTING HOLE with drill center marker"
+		},
+		{
+			"designator": "H2",
+			"value": "MOUNT-HOLE3.0",
+			"description": "MOUNTING HOLE with drill center marker"
+		},
+		{
+			"designator": "R1",
+			"value": "742C083822JPTR",
+			"description": "Resistor 4-pack"
+		},
+		{
+			"designator": "R2",
+			"value": "742C083472JPTR",
+			"description": "Resistor 4-pack"
+		},
+		{
+			"designator": "R3",
+			"value": "742C083222JPTR",
+			"description": "Resistor 4-pack"
+		},
+		{
+			"designator": "R4",
+			"value": "742C083122JPTR",
+			"description": "Resistor 4-pack"
+		},
+		{
+			"designator": "R5",
+			"value": "742C083561JPTR",
+			"description": "Resistor 4-pack"
+		},
+		{
+			"designator": "STK1",
+			"value": "STICKIT-HEADER1",
+			"description": "StickIt Header"
+		},
+		{
+			"designator": "STK2",
+			"value": "STICKIT-HEADER2",
+			"description": "StickIt Header"
+		},
+		{
+			"designator": "U$1",
+			"value": "CC_CC",
+			"description": ""
+		},
+		{
+			"designator": "U$2",
+			"value": "CC_SA",
+			"description": ""
+		},
+		{
+			"designator": "U$3",
+			"value": "CC_BY",
+			"description": ""
+		},
+		{
+			"designator": "U$4",
+			"value": "CC_COPYRIGHT",
+			"description": ""
+		},
+		{
+			"designator": "U$5",
+			"value": "LOGO-STICKIT1150X350",
+			"description": ""
+		},
+		{
+			"designator": "U$6",
+			"value": "LOGO-XESS900X250",
+			"description": ""
+		},
+		{
+			"designator": "X1",
+			"value": "K66XHT-E15S-N",
+			"description": "High-density, 15-pin SUB-D connector."
+		}
+	]
+}
