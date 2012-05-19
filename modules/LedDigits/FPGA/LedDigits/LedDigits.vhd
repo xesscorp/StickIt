@@ -32,6 +32,9 @@ package LedDigitsPckg is
 -- Subtype definition for the vector of bits that drive a seven-segment LED.
   subtype LedDigit_t is std_logic_vector(6 downto 0);
 
+-- Subtype definition for a four-bit hex digit.
+  subtype HexDigit_t is std_logic_vector(3 downto 0);
+
 --**************************************************************************************************
 -- This function takes an ASCII character or hex number as input and outputs the 
 -- LED segment activations that will display that character.
@@ -47,7 +50,7 @@ package LedDigitsPckg is
   component LedDigitsDisplay is
     generic (
       FREQ_G        : real := 100.0;    -- Operating frequency in MHz.
-      UPDATE_FREQ_G : real := 1.0  -- Desired update frequency for the LED segments in KHz.
+      UPDATE_FREQ_G : real := 1.0  -- Desired update frequency for the entire LED display in KHz.
       );
     port (
       clk_i          : in  std_logic;   -- Input clock.
@@ -67,6 +70,32 @@ package LedDigitsPckg is
       -- (6 downto 0)->ledDigit1_i, (13 downto 7)->ledDigit2_i, (20 downto 8)->ledDigit3_i, (27 downto 21)->ledDigit4_i, 
       -- (34 downto 28)->ledDigit5_i, (41 downto 35)->ledDigit6_i, (48 downto 42)->ledDigit7_i, (55 downto 49)->ledDigit8_i. 
       ledAllDigits_i : in  std_logic_vector(55 downto 0) := (others => ZERO);
+      -- These are the 3-state drivers for the LED digits.
+      ledDrivers_o   : out std_logic_vector (7 downto 0)
+      );
+  end component;
+
+  component LedHexDisplay is
+    generic (
+      FREQ_G        : real := 100.0;    -- Operating frequency in MHz.
+      UPDATE_FREQ_G : real := 1.0  -- Desired update frequency for the entire LED display in KHz.
+      );
+    port (
+      clk_i          : in  std_logic;   -- Input clock.
+      -- The following 4-bit vector inputs are the hex digits.
+      hexDigit1_i    : in  HexDigit_t                    := (others => ZERO);
+      hexDigit2_i    : in  HexDigit_t                    := (others => ZERO);
+      hexDigit3_i    : in  HexDigit_t                    := (others => ZERO);
+      hexDigit4_i    : in  HexDigit_t                    := (others => ZERO);
+      hexDigit5_i    : in  HexDigit_t                    := (others => ZERO);
+      hexDigit6_i    : in  HexDigit_t                    := (others => ZERO);
+      hexDigit7_i    : in  HexDigit_t                    := (others => ZERO);
+      hexDigit8_i    : in  HexDigit_t                    := (others => ZERO);
+      -- This is the same thing as all the individual 4-bit vectors combined into a single vector.
+      -- The following bit slices correspond to the vector inputs shown above:
+      -- (3 downto 0)->hexDigit1_i, (7 downto 4)->hexDigit2_i, (11 downto 8)->hexDigit3_i, (15 downto 12)->hexDigit4_i, 
+      -- (19 downto 16)->hexDigit5_i, (23 downto 20)->hexDigit6_i, (27 downto 24)->hexDigit7_i, (31 downto 28)->hexDigit8_i. 
+      hexAllDigits_i : in  std_logic_vector(31 downto 0) := (others => ZERO);
       -- These are the 3-state drivers for the LED digits.
       ledDrivers_o   : out std_logic_vector (7 downto 0)
       );
@@ -263,6 +292,69 @@ begin
   
 end architecture;
 
+
+
+--*********************************************************************
+-- This module displays a 32-bit number as a set of eight hex digits.
+--*********************************************************************
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use work.LedDigitsPckg.all;
+use work.CommonPckg.all;
+
+entity LedHexDisplay is
+  generic (
+    FREQ_G        : real := 100.0;      -- Operating frequency in MHz.
+    UPDATE_FREQ_G : real := 1.0  -- Desired update frequency for the entire LED display in KHz.
+    );
+  port (
+    clk_i          : in  std_logic;     -- Input clock.
+    -- The following 4-bit vector inputs are the hex digits.
+    hexDigit1_i    : in  HexDigit_t                    := (others => ZERO);
+    hexDigit2_i    : in  HexDigit_t                    := (others => ZERO);
+    hexDigit3_i    : in  HexDigit_t                    := (others => ZERO);
+    hexDigit4_i    : in  HexDigit_t                    := (others => ZERO);
+    hexDigit5_i    : in  HexDigit_t                    := (others => ZERO);
+    hexDigit6_i    : in  HexDigit_t                    := (others => ZERO);
+    hexDigit7_i    : in  HexDigit_t                    := (others => ZERO);
+    hexDigit8_i    : in  HexDigit_t                    := (others => ZERO);
+    -- This is the same thing as all the individual 4-bit vectors combined into a single vector.
+    -- The following bit slices correspond to the vector inputs shown above:
+    -- (3 downto 0)->hexDigit1_i, (7 downto 4)->hexDigit2_i, (11 downto 8)->hexDigit3_i, (15 downto 12)->hexDigit4_i, 
+    -- (19 downto 16)->hexDigit5_i, (23 downto 20)->hexDigit6_i, (27 downto 24)->hexDigit7_i, (31 downto 28)->hexDigit8_i. 
+    hexAllDigits_i : in  std_logic_vector(31 downto 0) := (others => ZERO);
+    -- These are the 3-state drivers for the LED digits.
+    ledDrivers_o   : out std_logic_vector (7 downto 0)
+    );
+end entity;
+
+architecture arch of LedHexDisplay is
+  signal hexDigits_s : std_logic_vector(31 downto 0);
+  signal digits_s    : std_logic_vector(55 downto 0);
+begin
+
+  -- Combine all the digit inputs into one large vector.
+  hexDigits_s <= hexAllDigits_i or (hexDigit8_i & hexDigit7_i & hexDigit6_i & hexDigit5_i & hexDigit4_i & hexDigit3_i & hexDigit2_i & hexDigit1_i);
+
+  -- Expand each 4-bit hex digit into a 7-bit vector and then generate the LED activation pattern for the digit.
+  u0 : for i in 0 to 7 generate
+    digits_s(i*7+6 downto i*7) <= CharToLedDigit("000" & hexDigits_s(i*4+3 downto i*4));
+  end generate;
+
+  u1 : LedDigitsDisplay
+    generic map(
+      FREQ_G        => FREQ_G,
+      UPDATE_FREQ_G => UPDATE_FREQ_G
+      )
+    port map (
+      clk_i          => clk_i,
+      ledAllDigits_i => digits_s,
+      ledDrivers_o   => ledDrivers_o
+      );
+
+end architecture;
 
 
 
