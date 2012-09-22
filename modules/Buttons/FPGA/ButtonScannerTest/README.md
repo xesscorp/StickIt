@@ -26,7 +26,7 @@ Important Files
 `ButtonScannerTest.xise`: The Xilinx ISE project file that ties all the previous files together.
 
 	
-Running the Button Scanner Test
+Running the Test
 -----------------------------------------------------
 
 1. Load the `.xise` project file with ISE and compile it into a `.bit` file.

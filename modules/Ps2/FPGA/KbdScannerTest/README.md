@@ -27,13 +27,13 @@ Important Files
 `KbdScannerTest.xise`: The Xilinx ISE project file that ties all the previous files together.
 
 	
-Running the PS/2 Keyboard Scanner Test
+Running the Test
 -----------------------------------------------------
 
 1. Load the `.xise` project file with ISE and compile it into a `.bit` file.
 1. Insert a XuLA board into a StickIt! motherboard.
 1. Attach a StickIt! PS/2 module to the PM4 connector of the motherboard.
-   Then plpug a PS/2 keyboard into the PS/2 module.
+   Then plug a PS/2 keyboard into the PS/2 module.
 1. Attach a StickIt! LED Digits module to the WING3 connector of the motherboard.
 1. Attach a USB cable to the XuLA board. (This will supply power for the
    entire collection of boards and modules.)

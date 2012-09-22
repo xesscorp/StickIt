@@ -22,7 +22,7 @@ Important Files
 `LedDigitsTest.xise`: The Xilinx ISE project file that ties all the previous files together.
 
 	
-Running the LED Digits Test
+Running the Test
 -----------------------------------------------------
 
 1. Load the `.xise` project file with ISE and compile it into a `.bit` file.
