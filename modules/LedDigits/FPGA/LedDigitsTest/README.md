@@ -1,4 +1,4 @@
-Button Scanner Test Design
+LED Digits Test Design
 ======================================================
 
 This FPGA design displays some scrolling text on the 
@@ -22,7 +22,7 @@ Important Files
 `LedDigitsTest.xise`: The Xilinx ISE project file that ties all the previous files together.
 
 	
-Running the Button Scanner Test
+Running the LED Digits Test
 -----------------------------------------------------
 
 1. Load the `.xise` project file with ISE and compile it into a `.bit` file.
