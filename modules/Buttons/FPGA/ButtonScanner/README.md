@@ -32,7 +32,7 @@ Running the Button Scanner Test
 1. Load the `.xise` project file with ISE and compile it into a `.bit` file.
 1. Insert a XuLA board into a StickIt! motherboard.
 1. Attach a StickIt! Button module to the PM4 connector of the motherboard.
-1. Attach a StickIt! LED module to the Wing3 connector of the motherboard.
+1. Attach a StickIt! LED module to the WING3 connector of the motherboard.
 1. Attach a USB cable to the XuLA board. (This will supply power for the
    entire collection of boards and modules.)
 1. Use `XSLOAD` or `GXSLOAD` to download the `.bit` file to the FPGA on the XuLA board.
