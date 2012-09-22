@@ -834,7 +834,7 @@ use work.SdramCntlPckg.all;
 use work.CommonPckg.all;
 
 
-entity TestPixelVga is
+entity PixelVgaTest is
   generic(
     SDRAM_NROWS_G     : natural := 4096;   -- #Rows for XuLA SDRAM.
     SDRAM_NCOLS_G     : natural := 512;    -- #Cols for XuLA SDRAM.
@@ -867,7 +867,7 @@ entity TestPixelVga is
 end entity;
 
 
-architecture arch of TestPixelVga is
+architecture arch of PixelVgaTest is
 
   signal clk_s           : std_logic;  -- 100 MHz clock generated from 12 MHz XuLA clock.
   signal rst_r           : std_logic;   -- reset signal.
