@@ -918,6 +918,7 @@ begin
   USdramCntl : SdramCntl
     generic map(
       FREQ_G        => FREQ_G,
+      PIPE_EN_G     => true,
       DATA_WIDTH_G  => DATA_WIDTH_G,
       NROWS_G       => SDRAM_NROWS_G,
       NCOLS_G       => SDRAM_NCOLS_G,
@@ -928,14 +929,15 @@ begin
       clk_i          => sdClkFb_i,      -- Master clock fed back from SDRAM.
       rst_i          => rst_r,
       rd_i           => full_bs,  -- Initiate a read when the VGA pixel buffer is not full.
-      hostAddr_i     => address_r,  -- The address to read from is stored in the address counter.
+      addr_i         => address_r,  -- The address to read from is stored in the address counter.
       earlyOpBegun_o => earlyOpBegun_s,  -- Indicate when the read operation has actually begun.
       rdDone_o       => rdDone_s,  -- Indicate when the data from the read operation is available.
-      sdramData_o    => pixel_s,  -- This is the pixel data that was read from the SDRAM.
+      data_o         => pixel_s,  -- This is the pixel data that was read from the SDRAM.
       sdRas_bo       => sdRas_bo,       -- SDRAM RAS.
       sdCas_bo       => sdCas_bo,       -- SDRAM CAS.
       sdWe_bo        => sdWe_bo,        -- SDRAM write-enable.
       sdBs_o(0)      => sdBs_o,         -- SDRAM bank address.
+      sdBs_o(1)      => open,
       sdAddr_o       => sdAddr_o,       -- SDRAM address.
       sdData_io      => sdData_io       -- Data to/from SDRAM.
       );
