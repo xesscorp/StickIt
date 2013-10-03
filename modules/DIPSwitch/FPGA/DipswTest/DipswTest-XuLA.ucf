@@ -1,0 +1,89 @@
+# XuLA pin assignments for Wing1
+#net dipsw_i<1> loc=p35;
+#net dipsw_i<2> loc=p44;
+#net dipsw_i<3> loc=p34;
+#net dipsw_i<4> loc=p36;
+#net dipsw_i<5> loc=p33;
+#net dipsw_i<6> loc=p37;
+#net dipsw_i<7> loc=p32;
+#net dipsw_i<8> loc=p50;
+
+# XuLA pin assignments for Wing2
+#net dipsw_i<1> loc=p20;
+#net dipsw_i<2> loc=p52;
+#net dipsw_i<3> loc=p19;
+#net dipsw_i<4> loc=p56;
+#net dipsw_i<5> loc=p13;
+#net dipsw_i<6> loc=p57;
+#net dipsw_i<7> loc=p12;
+#net dipsw_i<8> loc=p61;
+
+# XuLA pin assignments for Wing3
+net dipsw_i<1> loc=p62;
+net dipsw_i<2> loc=p4;
+net dipsw_i<3> loc=p3;
+net dipsw_i<4> loc=p72;
+net dipsw_i<5> loc=p73;
+net dipsw_i<6> loc=p94;
+net dipsw_i<7> loc=p83;
+net dipsw_i<8> loc=p84;
+
+# XuLA pin assignments for PM1
+#net dipsw_i<1> loc=p84;
+#net dipsw_i<2> loc=p83;
+#net dipsw_i<3> loc=p94;
+#net dipsw_i<4> loc=p73;
+#net dipsw_i<5> loc=p36;
+#net dipsw_i<6> loc=p34;
+#net dipsw_i<7> loc=p44;
+#net dipsw_i<8> loc=p35;
+
+# XuLA pin assignments for PM2
+#net dipsw_i<1> loc=p36;
+#net dipsw_i<2> loc=p34;
+#net dipsw_i<3> loc=p44;
+#net dipsw_i<4> loc=p35;
+#net dipsw_i<5> loc=p50;
+#net dipsw_i<6> loc=p32;
+#net dipsw_i<7> loc=p37;
+#net dipsw_i<8> loc=p33;
+
+# XuLA pin assignments for PM3
+#net dipsw_i<1> loc=p50;
+#net dipsw_i<2> loc=p32;
+#net dipsw_i<3> loc=p37;
+#net dipsw_i<4> loc=p33;
+#net dipsw_i<5> loc=p56;
+#net dipsw_i<6> loc=p19;
+#net dipsw_i<7> loc=p52;
+#net dipsw_i<8> loc=p20;
+
+# XuLA pin assignments for PM4
+#net dipsw_i<1> loc=p56;
+#net dipsw_i<2> loc=p19;
+#net dipsw_i<3> loc=p52;
+#net dipsw_i<4> loc=p20;
+#net dipsw_i<5> loc=p61;
+#net dipsw_i<6> loc=p12;
+#net dipsw_i<7> loc=p57;
+#net dipsw_i<8> loc=p13;
+
+# XuLA pin assignments for PM5
+#net dipsw_i<1> loc=p61;
+#net dipsw_i<2> loc=p12;
+#net dipsw_i<3> loc=p57;
+#net dipsw_i<4> loc=p13;
+#net dipsw_i<5> loc=p72;
+#net dipsw_i<6> loc=p3;
+#net dipsw_i<7> loc=p4;
+#net dipsw_i<8> loc=p62;
+
+# XuLA pin assignments for PM6
+#net dipsw_i<1> loc=p72;
+#net dipsw_i<2> loc=p3;
+#net dipsw_i<3> loc=p4;
+#net dipsw_i<4> loc=p62;
+#net dipsw_i<5> loc=p84;
+#net dipsw_i<6> loc=p83;
+#net dipsw_i<7> loc=p94;
+#net dipsw_i<8> loc=p73;

@@ -1,0 +1,90 @@
+# XuLA2 pin assignments for Wing1
+#net dipsw_i<1> loc=t4;
+#net dipsw_i<2> loc=t7;
+#net dipsw_i<3> loc=r2;
+#net dipsw_i<4> loc=r7;
+#net dipsw_i<5> loc=r1;
+#net dipsw_i<6> loc=r15;
+#net dipsw_i<7> loc=m2;
+#net dipsw_i<8> loc=m15;
+
+# XuLA2 pin assignments for Wing2
+#net dipsw_i<1> loc=k3;
+#net dipsw_i<2> loc=m16;
+#net dipsw_i<3> loc=j4;
+#net dipsw_i<4> loc=k15;
+#net dipsw_i<5> loc=h1;
+#net dipsw_i<6> loc=k16;
+#net dipsw_i<7> loc=h2;
+#net dipsw_i<8> loc=j16;
+
+# XuLA2 pin assignments for Wing3
+net dipsw_i<1> loc=j14;
+net dipsw_i<2> loc=f2;
+net dipsw_i<3> loc=e1;
+net dipsw_i<4> loc=f16;
+net dipsw_i<5> loc=c16;
+net dipsw_i<6> loc=c1;
+net dipsw_i<7> loc=b16;
+net dipsw_i<8> loc=b15;
+
+# XuLA2 pin assignments for PM1
+#net dipsw_i<1> loc=b15;
+#net dipsw_i<2> loc=b16;
+#net dipsw_i<3> loc=c1;
+#net dipsw_i<4> loc=c16;
+#net dipsw_i<5> loc=r7;
+#net dipsw_i<6> loc=r2;
+#net dipsw_i<7> loc=t7;
+#net dipsw_i<8> loc=t4;
+
+# XuLA2 pin assignments for PM2
+#net dipsw_i<1> loc=r7;
+#net dipsw_i<2> loc=r2;
+#net dipsw_i<3> loc=t7;
+#net dipsw_i<4> loc=t4;
+#net dipsw_i<5> loc=m15;
+#net dipsw_i<6> loc=m2;
+#net dipsw_i<7> loc=r15;
+#net dipsw_i<8> loc=r1;
+
+# XuLA2 pin assignments for PM3
+#net dipsw_i<1> loc=m15;
+#net dipsw_i<2> loc=m2;
+#net dipsw_i<3> loc=r15;
+#net dipsw_i<4> loc=r1;
+#net dipsw_i<5> loc=k15;
+#net dipsw_i<6> loc=j4;
+#net dipsw_i<7> loc=m16;
+#net dipsw_i<8> loc=k3;
+
+# XuLA2 pin assignments for PM4
+#net dipsw_i<1> loc=k15;
+#net dipsw_i<2> loc=j4;
+#net dipsw_i<3> loc=m16;
+#net dipsw_i<4> loc=k3;
+#net dipsw_i<5> loc=j16;
+#net dipsw_i<6> loc=h2;
+#net dipsw_i<7> loc=k16;
+#net dipsw_i<8> loc=h1;
+
+# XuLA2 pin assignments for PM5
+#net dipsw_i<1> loc=j16;
+#net dipsw_i<2> loc=h2;
+#net dipsw_i<3> loc=k16;
+#net dipsw_i<4> loc=h1;
+#net dipsw_i<5> loc=f16;
+#net dipsw_i<6> loc=e1;
+#net dipsw_i<7> loc=f2;
+#net dipsw_i<8> loc=j14;
+
+# XuLA2 pin assignments for PM6
+#net dipsw_i<1> loc=f16;
+#net dipsw_i<2> loc=e1;
+#net dipsw_i<3> loc=f2;
+#net dipsw_i<4> loc=j14;
+#net dipsw_i<5> loc=b15;
+#net dipsw_i<6> loc=b16;
+#net dipsw_i<7> loc=c1;
+#net dipsw_i<8> loc=c16;
+
