@@ -14,7 +14,7 @@
 #-- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 #-- 02111-1307, USA.
 #--
-#-- ©2011 - X Engineering Software Systems Corp. (www.xess.com)
+#-- ©2013 - X Engineering Software Systems Corp. (www.xess.com)
 #----------------------------------------------------------------------------------
 
 #
@@ -22,12 +22,93 @@
 #
 
 net clk_i           loc=p43;  # 100 MHz clock input.
-net mclk_o          loc=p73;  # Master clock to the codec.
-net sclk_o          loc=p72;  # Serial bit clock to the codec.
-net lrck_o          loc=p94;  # Left-right channel clock to the codec. 
-net sdti_o          loc=p83;  # Serial data input to the codec.
-net sdto_i          loc=p84;  # Serial data output from the codec.
+
+# WING1 connector.
+#net rstn_o          loc=p35;  # Active-low codec reset.
+#net cclk_o          loc=p44;  # Clock to codec configuration port.
+#net csn_o           loc=p34;  # Chip-select to codec control port.
+#net sclk_o          loc=p36;  # Serial bit clock to the codec.
+#net mclk_o          loc=p33;  # Master clock to the codec.
+#net lrck_o          loc=p37;  # Left-right channel clock to the codec. 
+#net sdti_o          loc=p32;  # Serial data input to the codec from the FPGA.
+#net sdto_i          loc=p50;  # Serial data output from the codec into the FPGA.
+
+# WING2 connector.
+#net rstn_o          loc=p20;  # Active-low codec reset.
+#net cclk_o          loc=p52;  # Clock to codec configuration port.
+#net csn_o           loc=p19;  # Chip-select to codec control port.
+#net sclk_o          loc=p56;  # Serial bit clock to the codec.
+#net mclk_o          loc=p13;  # Master clock to the codec.
+#net lrck_o          loc=p57;  # Left-right channel clock to the codec. 
+#net sdti_o          loc=p12;  # Serial data input to the codec from the FPGA.
+#net sdto_i          loc=p61;  # Serial data output from the codec into the FPGA.
+
+# WING3 connector.
+#net rstn_o          loc=p62;  # Active-low codec reset.
+net cclk_o          loc=p4;   # Clock to codec configuration port.
 net csn_o           loc=p3;   # Chip-select to codec control port.
-net cclk_o          loc=p4;   # Clock to codec control port.
-#net adcRdyDiag_o    loc=p88;
-#net dacRdyDiag_o    loc=p89;
+net sclk_o          loc=p72;  # Serial bit clock to the codec.
+net mclk_o          loc=p73;  # Master clock to the codec.
+net lrck_o          loc=p94;  # Left-right channel clock to the codec. 
+net sdti_o          loc=p83;  # Serial data input to the codec from the FPGA.
+net sdto_i          loc=p84;  # Serial data output from the codec into the FPGA.
+
+# PM1 connector.
+#net sdti_o          loc=p35;  # Serial data input to the codec from the FPGA.
+#net lrck_o          loc=p44;  # Left-right channel clock to the codec. 
+#net sclk_o          loc=p34;  # Serial bit clock to the codec.
+#net cclk_o          loc=p36;  # Clock to codec configuration port.
+#net sdto_i          loc=p73;  # Serial data output from the codec into the FPGA.
+#net mclk_o          loc=p94;  # Master clock to the codec.
+#net csn_o           loc=p83;  # Chip-select to codec control port.
+#net rstn_o          loc=p84;  # Active-low codec reset.
+
+# PM2 connector.
+#net sdti_o          loc=p33;  # Serial data input to the codec from the FPGA.
+#net lrck_o          loc=p37;  # Left-right channel clock to the codec. 
+#net sclk_o          loc=p32;  # Serial bit clock to the codec.
+#net cclk_o          loc=p50;  # Clock to codec configuration port.
+#net sdto_i          loc=p35;  # Serial data output from the codec into the FPGA.
+#net mclk_o          loc=p44;  # Master clock to the codec.
+#net csn_o           loc=p34;  # Chip-select to codec control port.
+#net rstn_o          loc=p36;  # Active-low codec reset.
+
+# PM3 connector.
+#net sdti_o          loc=p20;  # Serial data input to the codec from the FPGA.
+#net lrck_o          loc=p52;  # Left-right channel clock to the codec. 
+#net sclk_o          loc=p19;  # Serial bit clock to the codec.
+#net cclk_o          loc=p56;  # Clock to codec configuration port.
+#net sdto_i          loc=p33;  # Serial data output from the codec into the FPGA.
+#net mclk_o          loc=p37;  # Master clock to the codec.
+#net csn_o           loc=p32;  # Chip-select to codec control port.
+#net rstn_o          loc=p50;  # Active-low codec reset.
+
+# PM4 connector.
+#net sdti_o          loc=p13;  # Serial data input to the codec from the FPGA.
+#net lrck_o          loc=p57;  # Left-right channel clock to the codec. 
+#net sclk_o          loc=p12;  # Serial bit clock to the codec.
+#net cclk_o          loc=p61;  # Clock to codec configuration port.
+#net sdto_i          loc=p20;  # Serial data output from the codec into the FPGA.
+#net mclk_o          loc=p52;  # Master clock to the codec.
+#net csn_o           loc=p19;  # Chip-select to codec control port.
+#net rstn_o          loc=p56;  # Active-low codec reset.
+
+# PM5 connector.
+#net sdti_o          loc=p62;  # Serial data input to the codec from the FPGA.
+#net lrck_o          loc=p4;   # Left-right channel clock to the codec. 
+#net sclk_o          loc=p3;   # Serial bit clock to the codec.
+#net cclk_o          loc=p72;  # Clock to codec configuration port.
+#net sdto_i          loc=p13;  # Serial data output from the codec into the FPGA.
+#net mclk_o          loc=p57;  # Master clock to the codec.
+#net csn_o           loc=p12;  # Chip-select to codec control port.
+#net rstn_o          loc=p61;  # Active-low codec reset.
+
+# PM6 connector.
+#net sdti_o          loc=p73;  # Serial data input to the codec from the FPGA.
+#net lrck_o          loc=p94;  # Left-right channel clock to the codec. 
+#net sclk_o          loc=p83;  # Serial bit clock to the codec.
+#net cclk_o          loc=p84;  # Clock to codec configuration port.
+#net sdto_i          loc=p62;  # Serial data output from the codec into the FPGA.
+#net mclk_o          loc=p4;   # Master clock to the codec.
+#net csn_o           loc=p3;   # Chip-select to codec control port.
+#net rstn_o          loc=p72;  # Active-low codec reset.
