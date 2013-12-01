@@ -1,0 +1,57 @@
+net clk_i loc=a9; # 12 MHz clock to FPGA.
+
+# WING2 connections for LED Digits module.
+net led_o<0> loc=j16;
+net led_o<1> loc=h2;
+net led_o<2> loc=k16;
+net led_o<3> loc=h1;
+net led_o<4> loc=k15;
+net led_o<5> loc=j4;
+net led_o<6> loc=m16;
+net led_o<7> loc=k3;
+
+# WING1 connections for rotary encoder module.
+#net rotEncA_i   loc=r15;
+#net rotEncB_i   loc=r2;
+#net rotEncBtn_i loc=m15;
+
+# WING2 connections for rotary encoder module.
+#net rotEncA_i   loc=k16;
+#net rotEncB_i   loc=j4;
+#net rotEncBtn_i loc=j16;
+
+# WING3 connections for rotary encoder module.
+#net rotEncA_i   loc=c1;
+#net rotEncB_i   loc=e1;
+#net rotEncBtn_i loc=b15;
+
+# PM1 connections for rotary encoder module.
+#net rotEncA_i   loc=c1;
+#net rotEncB_i   loc=b16;
+#net rotEncBtn_i loc=c16;
+
+# PM2 connections for rotary encoder module.
+net rotEncA_i   loc=t7;
+net rotEncB_i   loc=r2;
+net rotEncBtn_i loc=t4;
+
+# PM3 connections for rotary encoder module.
+#net rotEncA_i   loc=r15;
+#net rotEncB_i   loc=m2;
+#net rotEncBtn_i loc=r1;
+
+# PM4 connections for rotary encoder module.
+#net rotEncA_i   loc=m16;
+#net rotEncB_i   loc=j4;
+#net rotEncBtn_i loc=k3;
+
+# PM5 connections for rotary encoder module.
+#net rotEncA_i   loc=k16;
+#net rotEncB_i   loc=h2;
+#net rotEncBtn_i loc=h1;
+
+# PM6 connections for rotary encoder module.
+#net rotEncA_i   loc=f2;
+#net rotEncB_i   loc=e1;
+#net rotEncBtn_i loc=j14;
+
