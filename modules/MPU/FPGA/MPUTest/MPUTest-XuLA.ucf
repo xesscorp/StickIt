@@ -1,0 +1,71 @@
+# HOW TO USE THIS:
+#    1. On the StickIt! module, look at the signals assigned to Wing connector pins A1 (bottom) ... A8 (top).
+#    2. Do a global substitution of the signal name assigned to A1 for the string ":A1:".
+#    3. Repeat step #2 for A2 ... A8.
+#    4. The resulting UCF is for the XuLA board (100-pin QFP package). Run the xulate.py program to create the
+#       pin assignments for the XuLA2 board.
+#
+
+
+# Wing 3
+net SCL      loc=p84;
+net SDA      loc=p94;
+net CLKIN    loc=p73;
+net INT      loc=p3;
+net FSYNC    loc=p62;
+             
+# Wing 2     
+net SCL      loc=p61;
+net SDA      loc=p57;
+net CLKIN    loc=p13;
+net INT      loc=p19;
+net FSYNC    loc=p20;
+             
+# Wing 1     
+net SCL      loc=p50;
+net SDA      loc=p37;
+net CLKIN    loc=p33;
+net INT      loc=p34;
+net FSYNC    loc=p35;
+             
+# PMOD 1     
+net SCL      loc=p73;
+net SDA      loc=p94;
+net INT      loc=p83;
+net FSYNC    loc=p84;
+net CLKIN    loc=p44;
+             
+# PMOD 2     
+net SCL      loc=p35;
+net SDA      loc=p44;
+net INT      loc=p34;
+net FSYNC    loc=p36;
+net CLKIN    loc=p37;
+             
+# PMOD 3     
+net SCL      loc=p33;
+net SDA      loc=p37;
+net INT      loc=p32;
+net FSYNC    loc=p50;
+net CLKIN    loc=p52;
+             
+# PMOD 4     
+net SCL      loc=p20;
+net SDA      loc=p52;
+net INT      loc=p19;
+net FSYNC    loc=p56;
+net CLKIN    loc=p57;
+             
+# PMOD 5     
+net SCL      loc=p13;
+net SDA      loc=p57;
+net INT      loc=p12;
+net FSYNC    loc=p61;
+net CLKIN    loc=p4;
+             
+# PMOD 6     
+net SCL      loc=p62;
+net SDA      loc=p4;
+net INT      loc=p3;
+net FSYNC    loc=p72;
+net CLKIN    loc=p94;

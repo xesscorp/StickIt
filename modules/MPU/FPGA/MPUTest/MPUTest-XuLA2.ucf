@@ -1,0 +1,64 @@
+net fpgaClk_i   loc=a9;
+
+# Wing 3
+#net scl_io      loc=b15;
+#net sda_io      loc=c1;
+#net clkin_o     loc=c16;
+#net int_i       loc=e1;
+#net fsync_o     loc=j14;
+             
+# Wing 2     
+#net scl_io      loc=j16;
+#net sda_io      loc=k16;
+#net clkin_o     loc=h1;
+#net int_i       loc=j4;
+#net fsync_o     loc=k3;
+             
+# Wing 1     
+#net scl_io      loc=m15;
+#net sda_io      loc=r15;
+#net clkin_o     loc=r1;
+#net int_i       loc=r2;
+#net fsync_o     loc=t4;
+             
+# PMOD 1     
+#net scl_io      loc=c16;
+#net sda_io      loc=c1;
+#net int_i       loc=b16;
+#net fsync_o     loc=b15;
+#net clkin_o     loc=t7;
+             
+# PMOD 2     
+#net scl_io      loc=t4;
+#net sda_io      loc=t7;
+#net int_i       loc=r2;
+#net fsync_o     loc=r7;
+#net clkin_o     loc=r15;
+             
+## PMOD 3     
+#net scl_io      loc=r1;
+#net sda_io      loc=r15;
+#net int_i       loc=m2;
+#net fsync_o     loc=m15;
+#net clkin_o     loc=m16;
+             
+# PMOD 4     
+#net scl_io      loc=k3;
+#net sda_io      loc=m16;
+#net int_i       loc=j4;
+#net fsync_o     loc=k15;
+#net clkin_o     loc=k16;
+             
+# PMOD 5     
+#net scl_io      loc=h1;
+#net sda_io      loc=k16;
+#net int_i       loc=h2;
+#net fsync_o     loc=j16;
+#net clkin_o     loc=f2;
+             
+# PMOD 6     
+net scl_io      loc=j14;
+net sda_io      loc=f2;
+net int_i       loc=e1;
+net fsync_o     loc=f16;
+net clkin_o     loc=c1;
