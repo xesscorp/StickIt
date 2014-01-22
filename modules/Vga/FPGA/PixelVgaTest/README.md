@@ -46,12 +46,12 @@ Running the 1024x768 Test
 -----------------------------------------------------
 
 1. Load the `.xise` project file with ISE and make the following changes:
-        1. On line 844, change `FREQ_G` to 64.8.
-        1. On line 845, change `CLK_DIV_G` to 1, making the pixel clock the same as the main clock.
-        1. On line 847, change `PIXELS_PER_LINE_G` to 1024.
-        1. On line 848, change `LINES_PER_FRAME_G` to 768.
-        1. Change line 886 to `generic map (BASE_FREQ_G => 12.0, CLK_MUL_G => 27, CLK_DIV_G => 5)`.
-           This changes the clock frequency to 12.0 * 27/5 = 64.8 MHz.
+    1. On line 844, change `FREQ_G` to 64.8.
+    1. On line 845, change `CLK_DIV_G` to 1, making the pixel clock the same as the main clock.
+    1. On line 847, change `PIXELS_PER_LINE_G` to 1024.
+    1. On line 848, change `LINES_PER_FRAME_G` to 768.
+    1. Change line 886 to `generic map (BASE_FREQ_G => 12.0, CLK_MUL_G => 27, CLK_DIV_G => 5)`.
+       This changes the clock frequency to 12.0 * 27/5 = 64.8 MHz.
 1. Insert a XuLA board into a StickIt! motherboard.
 1. Attach a StickIt! VGA module to the WING3 and WING2 connectors of the motherboard.
    Then plug a monitor into the VGA module.
