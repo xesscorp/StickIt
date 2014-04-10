@@ -1,0 +1,92 @@
+#---------------------------------------------------------------------
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+#
+# ©2011 - X Engineering Software Systems Corp. (www.xess.com)
+#---------------------------------------------------------------------
+
+net clk_i           loc = a9;   # 12 MHz clock from PIC.
+
+# Horizontal & vertical syncs.
+net hSync_bo        loc = b15;
+net vSync_bo        loc = b16;
+
+# Red, green, blue color components to VGA DACs.
+net red_o<1>        loc = h1;
+net red_o<2>        loc = j16;
+net red_o<3>        loc = e1;
+net red_o<4>        loc = c1;
+net green_o<0>      loc = m16;
+net green_o<1>      loc = k15;
+net green_o<2>      loc = h2;
+net green_o<3>      loc = f2;
+net green_o<4>      loc = c16;
+net blue_o<0>       loc = k3;
+net blue_o<1>       loc = j4;
+net blue_o<2>       loc = k16;
+net blue_o<3>       loc = j14;
+net blue_o<4>       loc = f16;
+
+# SDRAM I/O pins.
+net sdCke_o         loc = j12;  # Clock enable.
+net sdClk_o         loc = k11;  # Clock to SDRAM.
+net sdClkFb_i       loc = k12;  # Clock after I/O and PCB delays.
+net sdCe_bo         loc = h4;   # Chip-enable.
+net sdRas_bo        loc = l4;   # Row address strobe.
+net sdCas_bo        loc = l3;   # Column address strobe.
+net sdWe_bo         loc = m3;   # Write enable.
+net sdDqml_o        loc = m4;   # databus lower-byte qualifier.
+net sdDqmh_o        loc = l13;  # databus upper-byte qualifier.
+net sdBs_o<0>       loc = h3;   # Bank select.
+net sdBs_o<1>       loc = g3;   # Bank select.
+net sdAddr_o<0>     loc = e4;   # 13-bit address bus.
+net sdAddr_o<1>     loc = e3;
+net sdAddr_o<2>     loc = d3;
+net sdAddr_o<3>     loc = c3;
+net sdAddr_o<4>     loc = b12;
+net sdAddr_o<5>     loc = a12;
+net sdAddr_o<6>     loc = d12;
+net sdAddr_o<7>     loc = e12;
+net sdAddr_o<8>     loc = g16;
+net sdAddr_o<9>     loc = g12;
+net sdAddr_o<10>    loc = f4;
+net sdAddr_o<11>    loc = g11;
+net sdAddr_o<12>    loc = h13;
+net sdData_io<0>    loc = p6;   # 16-bit data bus.
+net sdData_io<1>    loc = t6;
+net sdData_io<2>    loc = t5;
+net sdData_io<3>    loc = p5;
+net sdData_io<4>    loc = r5;
+net sdData_io<5>    loc = n5;
+net sdData_io<6>    loc = p4;
+net sdData_io<7>    loc = n4;
+net sdData_io<8>    loc = p12;
+net sdData_io<9>    loc = r12;
+net sdData_io<10>   loc = t13;
+net sdData_io<11>   loc = t14;
+net sdData_io<12>   loc = r14;
+net sdData_io<13>   loc = t15;
+net sdData_io<14>   loc = t12;
+net sdData_io<15>   loc = p11;
+
+# Make all I/O pins LVTTL.
+net *               IOSTANDARD = LVTTL;
+
+# Tell ISE about the frequency of the 12 MHz input clock.
+NET "clk_i" TNM_NET = "clk_i";
+TIMESPEC "TS_clk_i" = PERIOD "clk_i" 83 ns HIGH 50%;
+
+# This handles complaints by ISE about the XuLA-50 Board.
+NET "clk_i" CLOCK_DEDICATED_ROUTE = FALSE;

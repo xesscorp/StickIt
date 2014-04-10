@@ -7,20 +7,25 @@ This FPGA design reads an image from SDRAM and displays it on a VGA monitor.
 Important Files
 -----------------------------------------------------
 
+All the VHDL files for this design are now part of the [XESS VHDL library](https://github.com/xesscorp/VHDL_Lib).
+Look at that repo for instructions on using the library. Here are the library files used in this project:
+
 `Vga.vhd`: Module for displaying a pixel-mode or text-mode image on a monitor
-    via a StickIt! VGA module. It also contains the test module.
+    via a StickIt! VGA module. It also contains the `PixelVgaTest` test module.
 
 `ClkGen.vhd`: Module for generating a new clock frequency from the master clock (usually 12 MHz).
 
 `SdramCntl.vhd`: Module for managing read/write access to the SDRAM on the XuLA board.
 
+`fifo.vhd`: Module containing several FIFO modules.
+
 `Common.vhd`: Commonly-used definitions and functions.
 	
-`PixelVgaTest.ucf`: Pin assignments for connecting the XuLA FPGA
+`PixelVgaTest-xula.ucf`: Pin assignments for connecting the XuLA FPGA
 	board to the StickIt! VGA module via the StickIt! motherboard.
-   (If you are using a XuLA2 board, then you will need to translate the 
-   XuLA pin assignments in the `.ucf` file.
-   The [`xulate`](https://github.com/xesscorp/xulate) program will help you do that.)
+	
+`PixelVgaTest-xula2.ucf`: Pin assignments for connecting the XuLA2 FPGA
+	board to the StickIt! VGA module via the StickIt! motherboard.
 
 `PixelVgaTest.xise`: The Xilinx ISE project file that ties all the previous files together.
 
