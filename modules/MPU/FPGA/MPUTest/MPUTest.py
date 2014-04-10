@@ -18,8 +18,10 @@
 # ***********************************************************************************/
    
 import sys
+import math
 import random
 import struct
+from pprint import pprint
 from xstools.xsi2c import *  # Import funcs/classes for PC <=> FPGA <=> I2C link.
 
 print '''\n
@@ -64,9 +66,14 @@ print 'Temperature (C) = %f' % (36.53 + temp/340.0)
 # Continually read the sensors and display their raw 16-bit hex values.
 print "\n Accelerometer  Temp   Gyroscope"
 print "  X    Y    Z    T    X    Y    Z"
+avg_data = [0,0,0,0,0,0,0]
 while True:
     accel_temp_gyro = ''.join([chr(b) for b in mpu.rd_reg(MPU_ACCEL_XOUT_H, 14)])
     raw_data = struct.unpack('>7H', accel_temp_gyro)
-    print '%04x %04x %04x %04x %04x %04x %04x\r' % raw_data,
+    raw_signed_data = struct.unpack('>7h', accel_temp_gyro)
+    avg_data = [0.9*x+0.1*y for x,y in zip(avg_data, raw_signed_data)]
+    total_accel = math.sqrt(sum(x*x for x in avg_data[:3]))
+    avg_data.append(total_accel)
+    print '%04x %04x %04x %04x %04x %04x %04x %04x\r' % tuple(avg_data),
 
 sys.exit(0)
