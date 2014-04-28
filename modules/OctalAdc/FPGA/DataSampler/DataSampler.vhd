@@ -167,9 +167,10 @@ begin
       )
     port map (
       clk_i         => clk_s,
+      numChans_i    => "11",            -- Sample 3 channels.
       analogChans_i => "010001000",     -- Sample channels 0, 1, and 2.
-      numChans_i    => "11",
---      analogChans_i => "000",     -- Sample channels 0, 1, and 2.
+--      numChans_i    => "1",       -- Sample 1 channel.
+--      analogChans_i => "000",     -- Sample only channel 0.
       run_i         => run_s,
       startAddr_i   => std_logic_vector(TO_UNSIGNED(0, SDRAM_HADDR_WIDTH_C)),
       numSamples_i  => std_logic_vector(TO_UNSIGNED(NUM_SAMPLES_G, SDRAM_HADDR_WIDTH_C)),
