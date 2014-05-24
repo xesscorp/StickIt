@@ -423,7 +423,7 @@ begin
       csn_o  => csn_o,
       cclk_o => cclk_o,
       cdti_o => cdti_s,
-      done_o => initDone_s -- This output enabless the AudioStream module once initialization is complete.
+      done_o => initDone_s -- This output enables the AudioStream module once initialization is complete.
       );
 
   -- Instantiate the codec interface.
