@@ -11,9 +11,9 @@ net led_o<6> loc=m16;
 net led_o<7> loc=k3;
 
 # WING1 connections for rotary encoder module.
-#net rotEncA_i   loc=r15;
-#net rotEncB_i   loc=r2;
-#net rotEncBtn_i loc=m15;
+net rotEncA_i   loc=r15;
+net rotEncB_i   loc=r2;
+net rotEncBtn_i loc=m15;
 
 # WING2 connections for rotary encoder module.
 #net rotEncA_i   loc=k16;
@@ -31,9 +31,9 @@ net led_o<7> loc=k3;
 #net rotEncBtn_i loc=c16;
 
 # PM2 connections for rotary encoder module.
-net rotEncA_i   loc=t7;
-net rotEncB_i   loc=r2;
-net rotEncBtn_i loc=t4;
+#net rotEncA_i   loc=t7;
+#net rotEncB_i   loc=r2;
+#net rotEncBtn_i loc=t4;
 
 # PM3 connections for rotary encoder module.
 #net rotEncA_i   loc=r15;
