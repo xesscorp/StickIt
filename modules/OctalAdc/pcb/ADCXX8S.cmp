@@ -1,171 +1,171 @@
-Cmp-Mod V01 Created by CvPcb (2014-02-04 BZR 4659)-product date = 03/19/2014 11:17:48 PM
+Cmp-Mod V01 Created by Cvpcb (2014-07-23 BZR 5022)-product   date = 08/02/2014 12:07:47 AM
 
 BeginCmp
 TimeStamp = /5322A550;
 Reference = C1;
 ValeurCmp = 4.7uF;
-IdModule  = rcl:rcl-C0603K;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /532A4CF7;
 Reference = C2;
 ValeurCmp = 4.7uF;
-IdModule  = rcl:rcl-C0603K;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /5322A566;
 Reference = C3;
-ValeurCmp = 1.0uF;
-IdModule  = rcl:rcl-C0603K;
+ValeurCmp = 4.7uF;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /5322A571;
 Reference = C4;
 ValeurCmp = 0.1uF;
-IdModule  = rcl:rcl-C0603K;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /53229473;
 Reference = C5;
 ValeurCmp = 1nF;
-IdModule  = rcl:rcl-C0603K;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /532294AB;
 Reference = C6;
 ValeurCmp = 1nF;
-IdModule  = rcl:rcl-C0603K;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /5322A57C;
 Reference = C7;
-ValeurCmp = 1uF;
-IdModule  = rcl:rcl-C0603K;
+ValeurCmp = 4.7uF;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /532294B6;
 Reference = C8;
 ValeurCmp = 1nF;
-IdModule  = rcl:rcl-C0603K;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /532294C1;
 Reference = C9;
 ValeurCmp = 1nF;
-IdModule  = rcl:rcl-C0603K;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /5322A587;
 Reference = C10;
 ValeurCmp = 0.1uF;
-IdModule  = rcl:rcl-C0603K;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /532294CC;
 Reference = C11;
 ValeurCmp = 1nF;
-IdModule  = rcl:rcl-C0603K;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /532294D7;
 Reference = C12;
 ValeurCmp = 1nF;
-IdModule  = rcl:rcl-C0603K;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /532294E2;
 Reference = C13;
 ValeurCmp = 1nF;
-IdModule  = rcl:rcl-C0603K;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /532294ED;
 Reference = C14;
 ValeurCmp = 1nF;
-IdModule  = rcl:rcl-C0603K;
+IdModule  = OctalAdc:rcl-C0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /532A5245;
 Reference = D1;
 ValeurCmp = MBR0520LT1G;
-IdModule  = sod123:SOD-123;
-EndCmp
-
-BeginCmp
-TimeStamp = /5321D602;
-Reference = J1;
-ValeurCmp = StickIt_Module_Connector;
-IdModule  = xess:xess-STICKIT-HEADER1;
+IdModule  = OctalAdc:SOD-123;
 EndCmp
 
 BeginCmp
 TimeStamp = /53229891;
-Reference = J2;
+Reference = J1;
 ValeurCmp = CONN_8X2;
-IdModule  = pinhead:pinhead-2X08;
+IdModule  = OctalAdc:pinhead-2X08;
 EndCmp
 
 BeginCmp
 TimeStamp = /5321D6D7;
 Reference = R1;
 ValeurCmp = 100;
-IdModule  = rcl:rcl-R0603;
+IdModule  = OctalAdc:rcl-R0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /5322A592;
 Reference = R2;
 ValeurCmp = 51;
-IdModule  = rcl:rcl-R0603;
+IdModule  = OctalAdc:rcl-R0603;
 EndCmp
 
 BeginCmp
 TimeStamp = /53227BA7;
 Reference = R3;
 ValeurCmp = 22;
-IdModule  = xess:xess-742C163;
+IdModule  = OctalAdc:xess-742C163;
 EndCmp
 
 BeginCmp
 TimeStamp = /532A55AB;
 Reference = R4;
 ValeurCmp = 1;
-IdModule  = rcl:rcl-R0603;
+IdModule  = OctalAdc:rcl-R0603;
 EndCmp
 
 BeginCmp
-TimeStamp = /5322BB52;
+TimeStamp = /5321D602;
+Reference = STK1;
+ValeurCmp = StickIt_Module_Connector;
+IdModule  = OctalAdc:xess-STICKIT-HEADER1;
+EndCmp
+
+BeginCmp
+TimeStamp = /53DC0084;
 Reference = U1;
-ValeurCmp = LP2950;
-IdModule  = ssop:SSOP-8;
+ValeurCmp = LP2980;
+IdModule  = SMD IC Pckgs:SOT23-5;
 EndCmp
 
 BeginCmp
 TimeStamp = /5321121F;
 Reference = U2;
 ValeurCmp = ADC108S;
-IdModule  = ssop:SSOP-16;
+IdModule  = SMD IC Pckgs:TSSOP16;
 EndCmp
 
 BeginCmp
 TimeStamp = /532A1923;
 Reference = U3;
 ValeurCmp = LM2660;
-IdModule  = ssop:SSOP-8;
+IdModule  = SMD IC Pckgs:SSOP8;
 EndCmp
 
 EndListe

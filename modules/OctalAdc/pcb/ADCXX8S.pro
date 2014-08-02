@@ -1,6 +1,6 @@
-update=04/25/2014 10:10:22 AM
+update=08/01/2014 11:05:55 PM
 version=1
-last_client=eeschema
+last_client=kicad
 [cvpcb]
 version=1
 NetIExt=net
@@ -37,6 +37,8 @@ SubpartIdSeparator=0
 SubpartFirstId=65
 LibDir=C:/xesscorp/PRODUCTS/StickIt/modules/OctalAdc/pcb
 NetFmtName=PcbnewAdvanced
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
 RptD_X=0
 RptD_Y=100
 RptLab=1
